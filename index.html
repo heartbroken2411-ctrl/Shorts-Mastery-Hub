@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shorts Mastery Hub — Create. Grow. Earn.</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts: Syne (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ===================== NOTIFICATION SYSTEM ===================== -->
+<div id="notification-container"></div>
+
+<!-- ===================== AUTH MODAL ===================== -->
+<div id="auth-modal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('auth-modal')">✕</button>
+    <div class="modal-tabs">
+      <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+      <button class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
+    </div>
+    <!-- Login Form -->
+    <div id="login-form" class="auth-form">
+      <h2>Welcome back 👋</h2>
+      <input type="email" id="login-email" placeholder="Email address" />
+      <input type="password" id="login-pass" placeholder="Password" />
+      <button class="btn-primary full-width" onclick="handleLogin()">Login</button>
+      <p class="demo-hint">Demo: any email + password works!</p>
+    </div>
+    <!-- Signup Form -->
+    <div id="signup-form" class="auth-form hidden">
+      <h2>Join for free 🚀</h2>
+      <input type="text" id="signup-name" placeholder="Your name" />
+      <input type="email" id="signup-email" placeholder="Email address" />
+      <input type="password" id="signup-pass" placeholder="Create password" />
+      <button class="btn-primary full-width" onclick="handleSignup()">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== QUIZ MODAL ===================== -->
+<div id="quiz-modal" class="modal-overlay hidden">
+  <div class="modal-box quiz-box">
+    <button class="modal-close" onclick="closeModal('quiz-modal')">✕</button>
+    <div id="quiz-content"></div>
+  </div>
+</div>
+
+<!-- ===================== NAV ===================== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo" onclick="showPage('home')">
+      <span class="logo-icon">▶</span>
+      <span>Shorts<strong>Mastery</strong></span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#" onclick="showPage('home')">Home</a></li>
+      <li><a href="#" onclick="showPage('courses')">Courses</a></li>
+      <li><a href="#" onclick="showPage('tools')">Tools</a></li>
+      <li><a href="#" onclick="showPage('monetization')">Earn</a></li>
+      <li><a href="#" onclick="showPage('dashboard')" id="dashboard-nav" class="hidden">Dashboard</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+      <div id="auth-buttons">
+        <button class="btn-ghost" onclick="openModal('auth-modal')">Login</button>
+        <button class="btn-primary" onclick="openModal('auth-modal')">Get Started</button>
+      </div>
+      <div id="user-menu" class="hidden">
+        <span id="user-greeting" class="user-greeting"></span>
+        <button class="btn-ghost" onclick="showPage('dashboard')">Dashboard</button>
+        <button class="btn-ghost" onclick="handleLogout()">Logout</button>
+      </div>
+      <button class="hamburger" onclick="toggleMobileMenu()" id="hamburger">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== PAGES ===================== -->
+<main id="app">
+
+  <!-- ========== HOME PAGE ========== -->
+  <div id="page-home" class="page active">
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-bg-grid"></div>
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-content">
+        <div class="hero-badge">🔥 #1 Platform for Shorts Creators</div>
+        <h1 class="hero-title">
+          Create Viral <span class="gradient-text">YouTube Shorts</span><br/>
+          &amp; Start Earning Today
+        </h1>
+        <p class="hero-sub">Master the art of Shorts creation — from scripting to editing to monetization. Join 50,000+ creators already earning.</p>
+        <div class="hero-cta-group">
+          <button class="btn-primary btn-xl" onclick="openModal('auth-modal')">🚀 Start Earning with Shorts</button>
+          <button class="btn-ghost btn-xl" onclick="showPage('courses')">Browse Courses →</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num">50K+</span><span class="stat-label">Creators</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num">200+</span><span class="stat-label">Lessons</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num">$2.4M</span><span class="stat-label">Earned by Students</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="phone-mockup">
+          <div class="phone-screen">
+            <div class="short-preview">
+              <div class="short-thumb" style="background: linear-gradient(135deg,#ff6b6b,#ff8e53);">
+                <span class="play-icon">▶</span>
+              </div>
+              <div class="short-info">
+                <p class="short-title">5 Shorts that got 1M views</p>
+                <p class="short-views">👁 1.2M views</p>
+              </div>
+            </div>
+            <div class="short-preview">
+              <div class="short-thumb" style="background: linear-gradient(135deg,#a18cd1,#fbc2eb);">
+                <span class="play-icon">▶</span>
+              </div>
+              <div class="short-info">
+                <p class="short-title">CapCut editing secrets</p>
+                <p class="short-views">👁 874K views</p>
+              </div>
+            </div>
+            <div class="short-preview">
+              <div class="short-thumb" style="background: linear-gradient(135deg,#43e97b,#38f9d7);">
+                <span class="play-icon">▶</span>
+              </div>
+              <div class="short-info">
+                <p class="short-title">Make $500/month with Shorts</p>
+                <p class="short-views">👁 2.1M views</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IDEA GENERATOR -->
+    <section class="idea-gen-section">
+      <div class="container">
+        <div class="section-label">✨ Instantly</div>
+        <h2 class="section-title">Shorts Idea Generator</h2>
+        <p class="section-sub">Stuck for ideas? Pick a category and get a viral-ready concept instantly.</p>
+        <div class="idea-categories">
+          <button class="cat-btn active" data-cat="all" onclick="setCategory(this,'all')">🎲 All</button>
+          <button class="cat-btn" data-cat="funny" onclick="setCategory(this,'funny')">😂 Funny</button>
+          <button class="cat-btn" data-cat="facts" onclick="setCategory(this,'facts')">🧠 Facts</button>
+          <button class="cat-btn" data-cat="islamic" onclick="setCategory(this,'islamic')">🌙 Islamic</button>
+          <button class="cat-btn" data-cat="gaming" onclick="setCategory(this,'gaming')">🎮 Gaming</button>
+          <button class="cat-btn" data-cat="motivation" onclick="setCategory(this,'motivation')">💪 Motivation</button>
+        </div>
+        <div class="idea-card" id="idea-display">
+          <div class="idea-icon">💡</div>
+          <p class="idea-text" id="idea-text">Click the button to generate a viral Short idea!</p>
+          <p class="idea-hook" id="idea-hook"></p>
+        </div>
+        <button class="btn-primary btn-lg idea-gen-btn" onclick="generateIdea()">⚡ Generate Idea</button>
+      </div>
+    </section>
+
+    <!-- FEATURED COURSES -->
+    <section class="featured-courses">
+      <div class="container">
+        <div class="section-label">📚 Learn</div>
+        <h2 class="section-title">Featured Courses</h2>
+        <div class="courses-grid" id="featured-courses-grid"></div>
+        <div class="center-btn">
+          <button class="btn-ghost btn-lg" onclick="showPage('courses')">View All Courses →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUCCESS STORIES -->
+    <section class="success-stories">
+      <div class="container">
+        <div class="section-label">🏆 Success</div>
+        <h2 class="section-title">Creator Success Stories</h2>
+        <div class="stories-grid">
+          <div class="story-card">
+            <div class="story-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)">A</div>
+            <div class="story-body">
+              <h4>Ahmed R.</h4>
+              <p class="story-tag">Islamic Content Creator</p>
+              <p>"I went from 0 to 200K subscribers in 4 months using the strategies from this platform!"</p>
+              <div class="story-earnings">💰 Earning $1,200/mo</div>
+            </div>
+          </div>
+          <div class="story-card story-featured">
+            <div class="story-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">S</div>
+            <div class="story-body">
+              <h4>Sarah K.</h4>
+              <p class="story-tag">Gaming Shorts Creator</p>
+              <p>"The CapCut editing course changed everything. My Shorts now get 500K+ views consistently!"</p>
+              <div class="story-earnings">💰 Earning $3,400/mo</div>
+            </div>
+          </div>
+          <div class="story-card">
+            <div class="story-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">M</div>
+            <div class="story-body">
+              <h4>Marcus T.</h4>
+              <p class="story-tag">Facts & Education Creator</p>
+              <p>"Joined the platform with no experience. Now I have brand deals and 150K subs!"</p>
+              <div class="story-earnings">💰 Earning $950/mo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRENDING TOPICS -->
+    <section class="trending-section">
+      <div class="container">
+        <div class="section-label">🔥 Trending</div>
+        <h2 class="section-title">Hot Topics Right Now</h2>
+        <div class="trending-grid">
+          <div class="trend-pill">🎯 Hook Writing</div>
+          <div class="trend-pill">✂️ CapCut Templates</div>
+          <div class="trend-pill">💸 Affiliate Shorts</div>
+          <div class="trend-pill">🤖 AI Script Tools</div>
+          <div class="trend-pill">📱 Vertical Video SEO</div>
+          <div class="trend-pill">🎵 Trending Audio</div>
+          <div class="trend-pill">🌙 Islamic Reminders</div>
+          <div class="trend-pill">🎮 Gaming Clips</div>
+          <div class="trend-pill">🧠 Psychology Facts</div>
+          <div class="trend-pill">💪 Fitness 60s</div>
+          <div class="trend-pill">📊 Faceless Channels</div>
+          <div class="trend-pill">🍳 Quick Recipes</div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /home page -->
+
+  <!-- ========== COURSES PAGE ========== -->
+  <div id="page-courses" class="page hidden">
+    <div class="page-hero">
+      <h1>All <span class="gradient-text">Courses</span></h1>
+      <p>From zero to viral — every skill you need in one place.</p>
+    </div>
+    <div class="container">
+      <div class="course-filter-bar">
+        <button class="filter-btn active" onclick="filterCourses(this,'all')">All</button>
+        <button class="filter-btn" onclick="filterCourses(this,'growth')">📈 Growth</button>
+        <button class="filter-btn" onclick="filterCourses(this,'editing')">✂️ Editing</button>
+        <button class="filter-btn" onclick="filterCourses(this,'ideas')">💡 Ideas & Niches</button>
+        <button class="filter-btn" onclick="filterCourses(this,'monetization')">💰 Monetization</button>
+      </div>
+      <div class="courses-grid" id="all-courses-grid"></div>
+    </div>
+  </div>
+
+  <!-- ========== COURSE DETAIL PAGE ========== -->
+  <div id="page-course-detail" class="page hidden">
+    <div class="container">
+      <button class="back-btn" onclick="goBack()">← Back to Courses</button>
+      <div id="course-detail-content"></div>
+    </div>
+  </div>
+
+  <!-- ========== TOOLS PAGE ========== -->
+  <div id="page-tools" class="page hidden">
+    <div class="page-hero">
+      <h1>Creator <span class="gradient-text">Toolkit</span></h1>
+      <p>Every tool a Shorts creator needs, curated and reviewed.</p>
+    </div>
+    <div class="container">
+      <div class="tools-grid" id="tools-grid"></div>
+    </div>
+  </div>
+
+  <!-- ========== MONETIZATION PAGE ========== -->
+  <div id="page-monetization" class="page hidden">
+    <div class="page-hero">
+      <h1>Start <span class="gradient-text">Earning</span></h1>
+      <p>Real ways real creators make real money with Shorts.</p>
+    </div>
+    <div class="container">
+
+      <!-- Live Earning Stats -->
+      <div class="earn-stats-banner">
+        <h3>📊 Live Demo Earnings Dashboard</h3>
+        <div class="earn-stats-row">
+          <div class="earn-stat-card">
+            <div class="earn-stat-label">This Month</div>
+            <div class="earn-stat-value" id="stat-month">$0</div>
+            <div class="earn-stat-bar"><div class="earn-bar-fill" style="width:72%"></div></div>
+          </div>
+          <div class="earn-stat-card">
+            <div class="earn-stat-label">Total Earnings</div>
+            <div class="earn-stat-value" id="stat-total">$0</div>
+            <div class="earn-stat-bar"><div class="earn-bar-fill" style="width:55%"></div></div>
+          </div>
+          <div class="earn-stat-card">
+            <div class="earn-stat-label">Views This Week</div>
+            <div class="earn-stat-value" id="stat-views">0</div>
+            <div class="earn-stat-bar"><div class="earn-bar-fill" style="width:88%"></div></div>
+          </div>
+          <div class="earn-stat-card">
+            <div class="earn-stat-label">Subscribers</div>
+            <div class="earn-stat-value" id="stat-subs">0</div>
+            <div class="earn-stat-bar"><div class="earn-bar-fill" style="width:44%"></div></div>
+          </div>
+        </div>
+        <p class="earn-disclaimer">* Demo stats for illustration. Real earnings vary by niche & effort.</p>
+      </div>
+
+      <!-- Monetization Methods -->
+      <h2 class="section-title mt-lg">Ways to Earn</h2>
+      <div class="monetize-grid">
+        <div class="monetize-card">
+          <div class="monetize-icon">▶️</div>
+          <h3>YouTube Partner Program</h3>
+          <p>Reach 1,000 subscribers + 10M Shorts views in 90 days to unlock ad revenue. Earn $0.03–$0.07 per 1,000 Shorts views.</p>
+          <div class="monetize-tips">
+            <span class="tip-tag">Eligibility guide →</span>
+          </div>
+        </div>
+        <div class="monetize-card">
+          <div class="monetize-icon">🔗</div>
+          <h3>Affiliate Marketing</h3>
+          <p>Promote products in your Shorts description. Top affiliates earn $500–$5,000/month. Best niches: tech, finance, beauty, gaming.</p>
+          <div class="monetize-tips">
+            <span class="tip-tag">Amazon Associates</span>
+            <span class="tip-tag">Impact.com</span>
+            <span class="tip-tag">ClickBank</span>
+          </div>
+        </div>
+        <div class="monetize-card">
+          <div class="monetize-icon">🤝</div>
+          <h3>Sponsorships</h3>
+          <p>Brands pay $50–$2,000 per Short at 10K–100K subscribers. Pitch yourself on Grin, AspireIQ, or direct outreach.</p>
+          <div class="monetize-tips">
+            <span class="tip-tag">Pitch template included</span>
+          </div>
+        </div>
+        <div class="monetize-card">
+          <div class="monetize-icon">📦</div>
+          <h3>Digital Products</h3>
+          <p>Sell your own presets, templates, or courses to your audience. 100% profit margin. Gumroad or Payhip make it easy.</p>
+          <div class="monetize-tips">
+            <span class="tip-tag">CapCut presets</span>
+            <span class="tip-tag">Notion templates</span>
+          </div>
+        </div>
+        <div class="monetize-card">
+          <div class="monetize-icon">🎁</div>
+          <h3>Channel Memberships</h3>
+          <p>Offer exclusive content to paying members ($1.99–$29.99/mo). Even 100 members = $200+ monthly recurring income.</p>
+          <div class="monetize-tips">
+            <span class="tip-tag">Unlock at 500 subs</span>
+          </div>
+        </div>
+        <div class="monetize-card">
+          <div class="monetize-icon">🏷️</div>
+          <h3>Merchandise</h3>
+          <p>Sell branded merch through Printful or YouTube Shopping. No upfront cost, 20–40% margin per sale.</p>
+          <div class="monetize-tips">
+            <span class="tip-tag">Printful</span>
+            <span class="tip-tag">Teespring</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Roadmap -->
+      <h2 class="section-title mt-lg">Earning Roadmap</h2>
+      <div class="roadmap">
+        <div class="roadmap-step">
+          <div class="roadmap-dot">1</div>
+          <div class="roadmap-content">
+            <h4>0–1K Subscribers</h4>
+            <p>Focus on affiliate marketing & building audience trust. Earn: $0–$200/mo</p>
+          </div>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot">2</div>
+          <div class="roadmap-content">
+            <h4>1K–10K Subscribers</h4>
+            <p>Unlock memberships, land micro-sponsorships, sell digital products. Earn: $200–$1,000/mo</p>
+          </div>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot">3</div>
+          <div class="roadmap-content">
+            <h4>10K–100K Subscribers</h4>
+            <p>YPP active, brand deals, merch launch, own course. Earn: $1,000–$5,000/mo</p>
+          </div>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot">4</div>
+          <div class="roadmap-content">
+            <h4>100K+ Subscribers</h4>
+            <p>Full-time income, agency clients, premium sponsorships. Earn: $5,000–$20,000+/mo</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== DASHBOARD PAGE ========== -->
+  <div id="page-dashboard" class="page hidden">
+    <div class="page-hero">
+      <h1>Your <span class="gradient-text">Dashboard</span></h1>
+      <p id="dashboard-welcome">Welcome back!</p>
+    </div>
+    <div class="container">
+      <div class="dashboard-grid">
+        <div class="dashboard-main">
+          <h3 class="dash-section-title">📚 Enrolled Courses</h3>
+          <div id="enrolled-courses-list"></div>
+        </div>
+        <div class="dashboard-sidebar">
+          <div class="dash-card">
+            <h4>🏅 Your Progress</h4>
+            <div class="overall-progress">
+              <div class="progress-label">Overall Completion</div>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" id="overall-progress-bar" style="width:0%"></div>
+              </div>
+              <div class="progress-pct" id="overall-progress-pct">0%</div>
+            </div>
+          </div>
+          <div class="dash-card">
+            <h4>🔥 Streak</h4>
+            <div class="streak-display" id="streak-display">0 days</div>
+            <p>Keep learning daily to grow your streak!</p>
+          </div>
+          <div class="dash-card">
+            <h4>🎯 Quick Actions</h4>
+            <button class="btn-primary full-width mb-sm" onclick="showPage('courses')">Browse More Courses</button>
+            <button class="btn-ghost full-width" onclick="generateIdea(); showPage('home'); setTimeout(()=>document.querySelector('.idea-gen-section').scrollIntoView({behavior:'smooth'}),300)">Get Content Idea</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo"><span class="logo-icon">▶</span><span>Shorts<strong>Mastery</strong></span></div>
+        <p>The world's most focused platform for YouTube Shorts creators.</p>
+      </div>
+      <div class="footer-links">
+        <h5>Platform</h5>
+        <ul>
+          <li><a href="#" onclick="showPage('courses')">Courses</a></li>
+          <li><a href="#" onclick="showPage('tools')">Tools</a></li>
+          <li><a href="#" onclick="showPage('monetization')">Earn</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Scale to Business</h5>
+        <ul>
+          <li>🔒 Premium Membership — $9.99/mo</li>
+          <li>🎯 1-on-1 Coaching — $99/session</li>
+          <li>📢 Brand Partnerships</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Shorts Mastery Hub. Built for creators, by creators.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
